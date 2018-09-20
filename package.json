@@ -4,7 +4,7 @@
   "description": "Server for an air ticket service",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "cross-env NODE_ENVIRONMENT=production node index",
     "start:dev": "nodemon"
   },
   "repository": {
@@ -18,14 +18,17 @@
   },
   "homepage": "https://github.com/elizavetd/air-ticket-server#readme",
   "dependencies": {
+    "@koa/cors": "^2.2.2",
     "dotenv": "^6.0.0",
     "koa": "^2.5.3",
+    "koa-bodyparser": "^4.2.1",
+    "koa-logger": "^3.2.0",
+    "koa-respond": "^1.0.1",
     "koa-router": "^7.4.0",
     "nodemon": "^1.18.4"
   },
   "devDependencies": {
-    "eslint": "^5.6.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "cross-env": "^5.2.0",
+    "eslint": "^5.6.0"
   }
 }
