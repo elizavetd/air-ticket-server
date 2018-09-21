@@ -1,5 +1,5 @@
 const Router = require('koa-router');
-const controller = require('../controllers/airplanes');
+const { airplane: controller } = require('../controllers');
 
 const router = new Router();
 

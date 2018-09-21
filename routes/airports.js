@@ -1,8 +1,12 @@
 const Router = require('koa-router');
-const controller = require('../controllers/airports');
+const { airport: controller } = require('../controllers');
 
 const router = new Router();
 
-router.get('/', controller.hello);
+router
+  .get('/', controller.findAll)
+  .post('/', controller.create)
+  .post('/:id', controller.update)
+  .delete('/:id', controller.destroy);
 
 module.exports = router.routes();
