@@ -6,30 +6,25 @@ async function findAll (ctx) {
 }
 
 async function create (ctx) {
-  // Create New Airport from payload sent and save to database
   const newAirport = new Airport(ctx.request.body);
   const savedAirport = await newAirport.save();
   ctx.body = savedAirport;
 }
 
 async function destroy (ctx) {
-  // Get id from url parameters and find Airport in database
   const id = ctx.params.id;
-  const todo = await Airport.findById(id);
+  const airportToDelete = await Airport.findById(id);
 
-  // Delete todo from database and return deleted object as reference
-  const deletedAirport = await todo.remove();
+  const deletedAirport = await airportToDelete.remove();
   ctx.body = deletedAirport;
 }
 
 async function update (ctx) {
-  // Find Airport based on id, then toggle done on/off
   const id = ctx.params.id;
-  const todo = await Airport.findById(id);
-  todo.done = !todo.done;
+  const airportToUpdate = await Airport.findByIdAndUpdate(id, ctx.request.body);
 
-  // Update todo in database
-  const updatedAirport = await todo.save();
+  // Update in database
+  const updatedAirport = await airportToUpdate.save();
   ctx.body = updatedAirport;
 }
 
