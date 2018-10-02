@@ -3,6 +3,9 @@ const { user: controller } = require('../controllers');
 
 const router = new Router();
 
-router.get('/', controller.hello);
+router
+  .get('/', controller.findAll)
+  .post('/', controller.create)
+  .delete('/:id', controller.destroy);
 
 module.exports = router.routes();

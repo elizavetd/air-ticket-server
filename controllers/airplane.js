@@ -23,7 +23,6 @@ async function update (ctx) {
   const id = ctx.params.id;
   const airportToUpdate = await Airplane.findByIdAndUpdate(id, ctx.request.body);
 
-  // Update in database
   const updatedAirplane = await airportToUpdate.save();
   ctx.body = updatedAirplane;
 }
