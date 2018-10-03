@@ -5,5 +5,6 @@ module.exports = (router) => {
     .use('/users', require('./users'))
     .use('/airports', require('./airports'))
     .use('/airplanes', require('./airplanes'))
+    .use('/airlines', require('./airlines'))
     .use('/flights', require('./flights'));
 };

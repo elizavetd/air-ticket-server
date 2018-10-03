@@ -1,10 +1,10 @@
-const { Airport } = require('../models');
+const { Airline } = require('../models');
 const { Status } = require('../constants');
 
 async function findAll (ctx) {
   try {
-    const airplanes = await Airport.find({});
-    ctx.body = airplanes;
+    const airlines = await Airline.find({});
+    ctx.body = airlines;
   } catch (error) {
     ctx.throw(Status.BadRequest, error);
   }
@@ -12,9 +12,9 @@ async function findAll (ctx) {
 
 async function create (ctx) {
   try {
-    const newAirport = new Airport(ctx.request.body);
-    const savedAirport = await newAirport.save();
-    ctx.body = savedAirport;
+    const newAirline = new Airline(ctx.request.body);
+    const savedAirline = await newAirline.save();
+    ctx.body = savedAirline;
   } catch (error) {
     ctx.throw(Status.BadRequest, error);
   }
@@ -23,10 +23,10 @@ async function create (ctx) {
 async function destroy (ctx) {
   try {
     const id = ctx.params.id;
-    const airportToDelete = await Airport.findById(id);
+    const airlineToDelete = await Airline.findById(id);
 
-    const deletedAirport = await airportToDelete.remove();
-    ctx.body = deletedAirport;
+    const deletedAirline = await airlineToDelete.remove();
+    ctx.body = deletedAirline;
   } catch (error) {
     ctx.throw(Status.BadRequest, error);
   }
@@ -35,10 +35,10 @@ async function destroy (ctx) {
 async function update (ctx) {
   try {
     const id = ctx.params.id;
-    const airportToUpdate = await Airport.findByIdAndUpdate(id, ctx.request.body);
+    const airlineToUpdate = await Airline.findByIdAndUpdate(id, ctx.request.body);
 
-    const updatedAirport = await airportToUpdate.save();
-    ctx.body = updatedAirport;
+    const updatedAirline = await airlineToUpdate.save();
+    ctx.body = updatedAirline;
   } catch (error) {
     ctx.throw(Status.BadRequest, error);
   }
