@@ -12,6 +12,19 @@ const BookingSchema = new mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: Models.User,
       required: true
+    },
+    passengerDetails: {
+      type: [{
+        firstName: {
+          type: mongoose.SchemaTypes.String,
+          required: true
+        },
+        lastName: {
+          type: mongoose.SchemaTypes.String,
+          required: true
+        }
+      }],
+      required: true
     }
   }, 
   {

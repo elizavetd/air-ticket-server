@@ -4,5 +4,6 @@ module.exports = {
   airplane: require('./airplane'),
   airline: require('./airline'),
   flight: require('./flight'),
-  user: require('./user')
+  user: require('./user'),
+  booking: require('./booking')
 };

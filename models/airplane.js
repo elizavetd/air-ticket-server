@@ -10,7 +10,8 @@ const AirplaneSchema = new mongoose.Schema(
     },
     airline: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: Models.Airline
+      ref: Models.Airline,
+      required: true
     },
     ICAOcode: {
       type: mongoose.SchemaTypes.String,
