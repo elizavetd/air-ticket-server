@@ -32,7 +32,6 @@ app
   .use(respond())
   .use(router.routes())
   .use(router.allowedMethods());
-  
 
 mongoose.connect(
   'mongodb://user:user123@ds263172.mlab.com:63172/air-ticket-database',

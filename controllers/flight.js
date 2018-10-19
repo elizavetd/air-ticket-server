@@ -35,7 +35,7 @@ async function destroy (ctx) {
 async function update (ctx) {
   try {
     const id = ctx.params.id;
-    const flightToUpdate = await Flight.findByIdAndUpdate(id, ctx.request.body);
+    const flightToUpdate = await Flight.findByIdAndUpdate(id, ctx.request.body, { new: true });
 
     const updatedFlight = await flightToUpdate.save();
     ctx.body = updatedFlight;

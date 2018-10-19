@@ -35,7 +35,7 @@ async function destroy (ctx) {
 async function update (ctx) {
   try {
     const id = ctx.params.id;
-    const airportToUpdate = await Airport.findByIdAndUpdate(id, ctx.request.body);
+    const airportToUpdate = await Airport.findByIdAndUpdate(id, ctx.request.body, { new: true });
 
     const updatedAirport = await airportToUpdate.save();
     ctx.body = updatedAirport;

@@ -43,7 +43,7 @@ async function destroy (ctx) {
 async function update (ctx) {
   try {
     const id = ctx.params.id;
-    const userToUpdate = await User.findByIdAndUpdate(id, ctx.request.body);
+    const userToUpdate = await User.findByIdAndUpdate(id, ctx.request.body, { new: true });
 
     const updatedUser = await userToUpdate.save();
     ctx.body = updatedUser;
