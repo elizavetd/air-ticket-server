@@ -11,6 +11,17 @@ async function findAll (ctx) {
   }
 }
 
+async function findOne (ctx) {
+  const id = ctx.params.id;
+
+  try {
+    const user = await User.findOne({ _id: id }, '-password');
+    ctx.body = user;
+  } catch (error) {
+    ctx.throw(Status.BadRequest, error);
+  }
+}
+
 async function create (ctx) {
   const { name, email, password } = ctx.request.body;
 
@@ -54,6 +65,7 @@ async function update (ctx) {
 
 module.exports = {
   findAll,
+  findOne,
   create,
   destroy,
   update

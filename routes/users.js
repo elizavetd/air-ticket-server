@@ -5,6 +5,7 @@ const router = new Router();
 
 router
   .get('/', controller.findAll)
+  .get('/:id', controller.findOne)
   .post('/', controller.create)
   .delete('/:id', controller.destroy);
 

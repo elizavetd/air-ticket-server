@@ -59,7 +59,7 @@ UserSchema.pre('save', function (next) {
     .hashPassword(this.password)
     .then((hash) => {
       this.password = hash;
-      next(); //async await?
+      next();
     });
 });
 
