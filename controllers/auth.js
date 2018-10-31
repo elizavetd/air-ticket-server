@@ -1,6 +1,7 @@
 const { jwtHelpers } = require('../helpers');
 const { Status, Errors } = require('../constants');
 const { User } = require('../models');
+const { omit } = require('lodash');
 
 async function login (ctx) {
   const { email, password } = ctx.request.body;
@@ -10,12 +11,15 @@ async function login (ctx) {
   }
 
   try {
-    const foundUser = await User.findOne({ email }, 'password _id');
+    const foundUser = await User.findOne({ email });
     const passwordCorrect = await foundUser.comparePassword(password);
 
     if (passwordCorrect) {
       ctx.status = Status.OK;
-      ctx.body = { token: jwtHelpers.issueToken({ email }) };
+      ctx.body = {
+        ...omit(foundUser.toObject(), ['password']),
+        token: jwtHelpers.issueToken({ email })
+      };
     } else {
       throw Errors.IncorrectEmailOrPassword;
     }
