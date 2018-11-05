@@ -1,7 +1,8 @@
 const { jwtHelpers } = require('../helpers');
 const { Status, Errors } = require('../constants');
 const { User } = require('../models');
-const { omit } = require('lodash');
+const { create } = require('./user');
+const { omit, isString } = require('lodash');
 
 async function login (ctx) {
   const { email, password } = ctx.request.body;
@@ -28,6 +29,29 @@ async function login (ctx) {
   }
 }
 
+async function signup (ctx) {
+  const { name, email, password } = ctx.request.body;
+
+  const isDataValid = name || email || password ||
+    isString(name) || isString(email) || isString(password);
+
+  ctx.assert(isDataValid, Status.BadRequest, Errors.UserDataRequired);
+
+  try {
+    const newUser = new User(ctx.request.body);
+    const savedUser = await newUser.save();
+
+    ctx.status = Status.OK;
+    ctx.body = {
+      ...omit(savedUser.toObject(), ['password']),
+      token: jwtHelpers.issueToken({ email: savedUser.email })
+    };
+  } catch (error) {
+    ctx.throw(Status.Unauthorized, error);
+  }
+}
+
 module.exports = {
-  login
+  login,
+  signup
 };
